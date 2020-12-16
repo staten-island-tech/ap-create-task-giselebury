@@ -1,4 +1,4 @@
-import {words, word} from "./words";
+import {words} from "./words";
 
 const DOMSelectors = {
     score: document.querySelector(".hangman-score"),
@@ -12,14 +12,14 @@ const indexNumber = function getNumber() {
 function getWord() {
    const randomWord = words.forEach((words) => 
     DOMSelectors.words.insertAdjacentHTML("beforeend",
-    `<p>${word[indexNumber()]}</p>`
+    `<p>${words[indexNumber()]}</p>`
     )
     );
 }
 
 getWord(); 
 
-console.log(words[indexNumber()])
+console.log(words[1])
 
 
 
