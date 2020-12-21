@@ -23,6 +23,9 @@ function start(){
         e.preventDefault();
         DOMSelectors.playBtn.style.display = "none";
         randomWord()
+        alphabet.forEach((letter) => DOMSelectors.guess.insertAdjacentHTML("beforeend", 
+        `<button class="guess-btn"></button>`
+        ))
     })
 }
 
