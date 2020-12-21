@@ -1,4 +1,4 @@
-import {words} from "./words";
+import {words, alphabet} from "./words";
 
 const DOMSelectors = {
     game: document.querySelector(".hangman-game"),
@@ -26,14 +26,7 @@ function start(){
     })
 }
 
-function userInput(){
-    DOMSelectors.guess.addEventListener("keyup", function(e) {
-        e.preventDefault();
-        const guessed = DOMSelectors.guess.value;
-        console.log(guessed);    
-    })
-    
-}
+
 
 
 start();
