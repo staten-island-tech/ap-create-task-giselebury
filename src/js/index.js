@@ -6,13 +6,16 @@ const DOMSelectors = {
     words: document.querySelector(".hangman-words"),
     playBtn: document.querySelector(".play-btn"),
     hangman: document.querySelector(".hangman"),
-    guess: document.querySelector('.hangman-guess')
+    guess: document.querySelector('.hangman-guess'),
+    guessBtn: document.querySelector(".guess-btn")
 }
 
 
-let answer = [];
+let answer;
+let guesses = [];
 
-function randomWord() {
+//get random word and display dashes
+function randomWord(){
     answer = words[Math.floor(Math.random() * 10)]
     console.log(answer);
     for (let i = 0; i < answer.length; i++) {
@@ -20,24 +23,32 @@ function randomWord() {
     }
 }
 
-
+//start the game
 function start(){
     DOMSelectors.playBtn.addEventListener("click", (e) => {
         e.preventDefault();
         DOMSelectors.playBtn.style.display = "none";
         randomWord()
         alphabet.forEach((letter) => DOMSelectors.guess.insertAdjacentHTML("beforeend", 
-        `<button class="guess-btn">${letter}</button>`
+        `<button class="guess-btn" id = "${letter}">${letter}</button>`
         ))
+    })
+
+}
+
+//check if letter clicked is a letter in word
+function checkLetter() {
+    DOMSelectors.guessBtn.addEventListener("click", (e) => {
+        guess = e.target.value;
+        console.log(guess)
     })
 }
 
 
 
-
 start();
+checkLetter();
 
-//check input
 
 
 
