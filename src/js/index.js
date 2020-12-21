@@ -10,11 +10,14 @@ const DOMSelectors = {
 }
 
 
-let answer;
+let answer = [];
 
 function randomWord() {
     answer = words[Math.floor(Math.random() * 10)]
     console.log(answer);
+    for (let i = 0; i < answer.length; i++) {
+        DOMSelectors.words.innerHTML += "_ "
+    }
 }
 
 
@@ -24,7 +27,7 @@ function start(){
         DOMSelectors.playBtn.style.display = "none";
         randomWord()
         alphabet.forEach((letter) => DOMSelectors.guess.insertAdjacentHTML("beforeend", 
-        `<button class="guess-btn"></button>`
+        `<button class="guess-btn">${letter}</button>`
         ))
     })
 }
@@ -33,7 +36,6 @@ function start(){
 
 
 start();
-userInput();
 
 //check input
 
