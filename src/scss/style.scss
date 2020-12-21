@@ -4,15 +4,22 @@ body {
   margin: 0;
   font-size: 62.5%;
   background-color: white;
+  font-family: 'Segoe UI', 'Roboto', arial, sans-serif;
 }
 
 .hangman-game{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 h1{
     font-size: 3rem;
     text-align: center;
 }
+
+.play-btn{
+  font-size: 2rem;
+}
+

@@ -4,14 +4,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="scss/style.scss">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <h1>Hangman</h1>
-    <div class="hangman-game">
-        <div class="hangman-score"></div>
-        <div class="hangman-words">
-            <!-- <p></p> -->
+    <div class="hangman-game">        
+        <button class="play-btn">Play</button>
+        <div class="hangman-guess">
+            <input type="text" placeholder="Guess a letter" class="guess"> 
         </div>
+        <div class="hangman"></div>
+        <div class="hangman-words"></div>
     </div>
     
 </body>
