@@ -29,25 +29,33 @@ function start(){
         e.preventDefault();
         DOMSelectors.playBtn.style.display = "none";
         randomWord()
-        alphabet.forEach((letter) => DOMSelectors.guess.insertAdjacentHTML("beforeend", 
+        alphabet.forEach((letter) => {DOMSelectors.guess.insertAdjacentHTML("beforeend", 
         `<button class="guess-btn" id = "${letter}">${letter}</button>`
-        ))
+        )
+        const btn = document.createElement("button");
+        btn.classList.add("guess-btn");
+        btn.setAttribute("id", letter);
+        btn.innerHTML = letter;
+        DOMSelectors.guess.insertAdjacentElement("beforeend", btn);
+        btn.addEventListener("click", (e) => {
+        guess = e.target.value;
+        console.log(guess)
+            })  
+    
+        })
+      
     })
+    
+
+
 
 }
 
 //check if letter clicked is a letter in word
-function checkLetter() {
-    DOMSelectors.guessBtn.addEventListener("click", (e) => {
-        guess = e.target.value;
-        console.log(guess)
-    })
-}
 
 
 
 start();
-checkLetter();
 
 
 
