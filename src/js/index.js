@@ -36,8 +36,6 @@ function start(){
         DOMSelectors.playBtn.style.display = "none";
         randomWord();
         createButton();
-        DOMSelectors.guess.style.display = 'block'; //how do i get this to display
-        guessLetter();
 
     })
 }
@@ -63,7 +61,7 @@ const guessLetter = (e) => {
     let currentGuess = e.target.textContent; //here
     for (let i = 0; i < answer.length; i++){
         if(currentGuess === answer[i]){
-            let correctEle = DOMSelectors.words[i];
+            let correctEle = DOMSelectors.words.children[i];
             correctEle.innerHTML = currentGuess;
             guessed[i] = currentGuess;
         }
@@ -72,7 +70,7 @@ const guessLetter = (e) => {
     DOMSelectors.guess.innerHTML = num;
 
     console.log(guessed);
-    if (checkWin){
+    if (checkWin()){
         alert('You win!');
         endGame();
     } else if (num === 0) {
@@ -95,8 +93,7 @@ const endGame = () => {
     btn.classList.add('play-btn');
     btn.innerHTML = 'Play Again'
     btn.onclick = function () {
-        btn.remove();
-        start()
+        window.location.reload();
     }
     DOMSelectors.game.append(btn);
 }
