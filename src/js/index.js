@@ -36,7 +36,7 @@ function start(){
         DOMSelectors.playBtn.style.display = "none";
         randomWord();
         createButton();
-        DOMSelectors.guess.style.display; //how do i get this to display
+        DOMSelectors.guess.style.display = 'block'; //how do i get this to display
         guessLetter();
 
     })
