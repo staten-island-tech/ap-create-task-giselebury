@@ -5,13 +5,15 @@ const DOMSelectors = {
     playBtn: document.querySelector(".play-btn"),
     hangman: document.querySelector(".hangman"),
     words: document.querySelector(".hangman-words"),
-    letter: document.querySelector(".hangman-letters")
+    letter: document.querySelector(".hangman-letters"),
+    guess: document.getElementById('guesses')
 
 }
 
 
 let answer;
 let guessed = [];
+let num = 10;
 
 //get random word and display dashes
 function randomWord(){
@@ -34,6 +36,9 @@ function start(){
         DOMSelectors.playBtn.style.display = "none";
         randomWord();
         createButton();
+        DOMSelectors.guess.style.display; //how do i get this to display
+        guessLetter();
+
     })
 }
 
@@ -55,7 +60,7 @@ const createButton = () => {
 const guessLetter = (e) => {
     console.log(e.target.textContent);
     e.target.classList.add('btn-click');
-    let currentGuess = e.target.textContent;
+    let currentGuess = e.target.textContent; //here
     for (let i = 0; i < answer.length; i++){
         if(currentGuess === answer[i]){
             let correctEle = DOMSelectors.words[i];
@@ -63,7 +68,37 @@ const guessLetter = (e) => {
             guessed[i] = currentGuess;
         }
     }
+    num--;
+    DOMSelectors.guess.innerHTML = num;
+
     console.log(guessed);
+    if (checkWin){
+        alert('You win!');
+        endGame();
+    } else if (num === 0) {
+        alert('Game Over')
+        endGame();
+    }
+}
+
+// check win
+const checkWin = () => {
+    let win = false
+    if (!guessed.includes('_')){
+        win = true
+    }
+    return win
+}
+
+const endGame = () => {
+    let btn = document.createElement('button');
+    btn.classList.add('play-btn');
+    btn.innerHTML = 'Play Again'
+    btn.onclick = function () {
+        btn.remove();
+        start()
+    }
+    DOMSelectors.game.append(btn);
 }
 
 start();
