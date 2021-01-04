@@ -1,61 +1,73 @@
-import {words, alphabet} from "./words";
+import {words} from "./words";
 
 const DOMSelectors = {
     game: document.querySelector(".hangman-game"),
-    score: document.querySelector(".hangman-score"),
-    words: document.querySelector(".hangman-words"),
     playBtn: document.querySelector(".play-btn"),
     hangman: document.querySelector(".hangman"),
-    guess: document.querySelector('.hangman-guess'),
-    guessBtn: document.querySelector(".guess-btn")
+    words: document.querySelector(".hangman-words"),
+    letter: document.querySelector(".hangman-letters")
+
 }
 
 
 let answer;
-let guesses = [];
+let guessed = [];
 
 //get random word and display dashes
 function randomWord(){
     answer = words[Math.floor(Math.random() * 10)]
     console.log(answer);
     for (let i = 0; i < answer.length; i++) {
-        DOMSelectors.words.innerHTML += "_ "
-    }
+        let button = document.createElement('button');
+        button.classList.add('guess-btn');
+        button.innerHTML += '_';
+        DOMSelectors.words.append(button);
+        guessed.push('_');
+    } 
 }
+
 
 //start the game
 function start(){
     DOMSelectors.playBtn.addEventListener("click", (e) => {
         e.preventDefault();
         DOMSelectors.playBtn.style.display = "none";
-        randomWord()
-        alphabet.forEach((letter) => {DOMSelectors.guess.insertAdjacentHTML("beforeend", 
-        `<button class="guess-btn" id = "${letter}">${letter}</button>`
-        )
-        const btn = document.createElement("button");
-        btn.classList.add("guess-btn");
-        btn.setAttribute("id", letter);
-        btn.innerHTML = letter;
-        DOMSelectors.guess.insertAdjacentElement("beforeend", btn);
-        btn.addEventListener("click", (e) => {
-        guess = e.target.value;
-        console.log(guess)
-            })  
-    
-        })
-      
+        randomWord();
+        createButton();
     })
-    
+}
 
 
-
+const createButton = () => {
+    let start = 'a'
+    let end = 'z'
+    for (let i = start.charCodeAt(); i<= end.charCodeAt(); i++) {
+        //console.log(String.fromCharCode(i));
+        let newBtn = document.createElement('button');
+        newBtn.classList.add('letter-btn');
+        newBtn.innerHTML = String.fromCharCode(i);
+        newBtn.onclick = guessLetter;
+        DOMSelectors.letter.append(newBtn);
+    }
 }
 
 //check if letter clicked is a letter in word
-
-
+const guessLetter = (e) => {
+    console.log(e.target.textContent);
+    e.target.classList.add('btn-click');
+    let currentGuess = e.target.textContent;
+    for (let i = 0; i < answer.length; i++){
+        if(currentGuess === answer[i]){
+            let correctEle = DOMSelectors.words[i];
+            correctEle.innerHTML = currentGuess;
+            guessed[i] = currentGuess;
+        }
+    }
+    console.log(guessed);
+}
 
 start();
+
 
 
 
